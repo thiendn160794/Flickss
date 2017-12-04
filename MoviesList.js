@@ -1,22 +1,15 @@
-//import liraries
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  ActivityIndicator
-} from "react-native";
+import {View, Text, FlatList, ActivityIndicator} from "react-native";
 import MovieItem from "./MovieItem";
 
 const api_key = "347085c63478d00dd3ba964029427ad7";
 
-// create a component
 class MoviesList extends Component {
+
   static navigationOptions = {
-    title: 'Movies',
     headerTitle: 'Movies'
-  }
+  };
+
   constructor(props) {
     super();
     this.state = {
@@ -29,6 +22,7 @@ class MoviesList extends Component {
     this.onPullToRefresh = this.onPullToRefresh.bind(this);
     this.onLoadMore = this.onLoadMore.bind(this);
     this.fetchRemote = this.fetchRemote.bind(this);
+    this.goDetail = this.goDetail.bind(this);
   }
 
   componentDidMount(props) {
@@ -70,7 +64,6 @@ class MoviesList extends Component {
 
   render() {
     console.log("error: ", this.state.error)
-    let screenProps = this.props.screenProps; 
     let navigate = this.props.navigation.navigate;
     if (this.state.error != null) {
         console.log("error: ", this.state.error)
@@ -82,22 +75,21 @@ class MoviesList extends Component {
     }
     if (this.state.loading) {
       return (
-        <View style={{ flex: 1, paddingTop: 20 , justifyContent: "center", alignItems: "center"}}>
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center"}}>
             <ActivityIndicator size = "large"/>
         </View>
       );
     }
     return (
-        <FlatList
-            style = {{backgroundColor : 'yellow'}}
-            data={this.state.data}
-            renderItem={movieItem => <MovieItem {...movieItem.item} />}
-            // keyExtractor = {(item, index) => item.id}
-            onRefresh={this.onPullToRefresh}
-            refreshing={this.state.refreshing}
-            onEndReached={this.onLoadMore}
-            onEndReachedThreshold={0.3}
-        />
+      <FlatList
+          data={this.state.data}
+          renderItem={movieItem => <MovieItem {...movieItem.item} goDetail = {() => navigate("MovieDetail", movieItem.item)}/>}
+          keyExtractor = {(item, index) => item.id}
+          onRefresh={this.onPullToRefresh}
+          refreshing={this.state.refreshing}
+          onEndReached={this.onLoadMore}
+          onEndReachedThreshold={0.3}
+      />
     );
   }
 
@@ -126,18 +118,10 @@ class MoviesList extends Component {
         }
     );
   }
+
+  goDetail(){
+
+  }
 }
 
-// define your styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#2c3e50",
-    paddingTop: 20
-  }
-});
-
-//make this component available to the app
 export default MoviesList;

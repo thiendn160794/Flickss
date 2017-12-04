@@ -10,7 +10,7 @@ class MovieItem extends PureComponent {
     let url = "https://image.tmdb.org/t/p/original" + movie.poster_path
     console.log(movie.title)
     return (
-      <TouchableHighlight> 
+      <TouchableHighlight onPress = {this.props.goDetail}> 
         <View>
           <Card style = {{flex : 1}} title = {movie.title}>
               <Text style={{marginBottom: 10, flex : 0.5}}>

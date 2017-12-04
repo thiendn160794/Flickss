@@ -21,7 +21,7 @@ class MovieTab extends Component {
     return (
       <Routes
         screenProps={{
-          url : "https://api.themoviedb.org/3/movie/now_playing"
+          url : this.props.url
         }}
       />
     );
