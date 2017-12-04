@@ -1,6 +1,5 @@
 import React, { Component, PureComponent } from "react";
 import { View, Text, StyleSheet, TouchableHighlight, Image } from "react-native";
-import { Card } from 'react-native-elements';
 
 class MovieItem extends PureComponent {
   render() {
@@ -9,12 +8,24 @@ class MovieItem extends PureComponent {
     console.log(movie.title)
     return (
       <TouchableHighlight onPress = {this.props.goDetail}> 
-        <View>
-          <Card style = {{flex : 1}} title = {movie.title}>
-              <Text style={{marginBottom: 10, flex : 0.5}}>
-                  {movie.overview}
-              </Text>
-          </Card>
+        <View style = {{height : 200, flex: 1, flexDirection: 'row'}}>
+          <Image
+            style={{flex : 0.4}}
+            source={{
+              uri:
+                url
+            }}
+          />
+          <View style = {{flex: 0.04}}/>
+          <View style = {{flex: 0.56, flexDirection: 'column'}}>
+            <Text style = {{flex: 0.1, fontSize: 20, fontWeight: 'bold', }}>{movie.title}</Text>
+            <View style = {{flex: 0.05}}/>
+            <View style = {{flex: 0.8, flexDirection: 'row'}}>
+              <Text style = {{flex: 0.9}}>{movie.overview}</Text>
+              <View style = {{flex: 0.1}}/>
+            </View>
+            <View style = {{flex: 0.05}}/>
+          </View>
         </View>
       </TouchableHighlight>
     );

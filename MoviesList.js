@@ -22,7 +22,8 @@ class MoviesList extends Component {
     this.onPullToRefresh = this.onPullToRefresh.bind(this);
     this.onLoadMore = this.onLoadMore.bind(this);
     this.fetchRemote = this.fetchRemote.bind(this);
-    this.goDetail = this.goDetail.bind(this);
+    this.renderSeparator = this.renderSeparator.bind(this);
+    this.renderFooter = this.renderFooter.bind(this);
   }
 
   componentDidMount(props) {
@@ -89,6 +90,8 @@ class MoviesList extends Component {
           refreshing={this.state.refreshing}
           onEndReached={this.onLoadMore}
           onEndReachedThreshold={0.3}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListFooterComponent={this.renderFooter}
       />
     );
   }
@@ -119,9 +122,33 @@ class MoviesList extends Component {
     );
   }
 
-  goDetail(){
+  renderSeparator() {
+    return (
+      <View
+        style={{
+          height: 2,
+          backgroundColor: "#CED0CE",
+        }}
+      />
+    );
+  };
 
-  }
+  renderFooter() {
+    if (!this.state.loading) return null;
+
+    return (
+      <View
+        style={{
+          paddingVertical: 20,
+          borderTopWidth: 1,
+          borderColor: "#CED0CE"
+        }}
+      >
+        <ActivityIndicator animating size="large" />
+      </View>
+    );
+  };
+
 }
 
 export default MoviesList;
