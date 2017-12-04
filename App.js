@@ -1,18 +1,27 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import {StackNavigator} from 'react-navigation'
+import {StackNavigator, TabNavigator} from 'react-navigation'
 import MovieTab from './MovieTab'
-import MoviesList from './MoviesList';
-import MovieDetail from "./MovieDetail";
 
-const Routes = StackNavigator({
-  MoviesList: { screen: MoviesList },
-  MovieDetail: { screen: MovieDetail }
+const TabLayout = TabNavigator({
+  NowPlaying: {
+    screen: props => <MovieTab url = "https://api.themoviedb.org/3/movie/now_playing"  />
+  },
+  TopRated: {
+    screen: props => <MovieTab url = "https://api.themoviedb.org/3/movie/top_rated"  />
+  },
+}, {
+  animationEnabled: true,
+  tabBarOptions: {
+    activeTintColor: '#e91e63',
+  },
 });
+
+
 export default class App extends React.Component {
   render() {
     return (
-         <MovieTab url = "https://api.themoviedb.org/3/movie/now_playing"/>
+        <TabLayout />
     );
   }
 }

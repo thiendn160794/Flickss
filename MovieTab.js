@@ -1,4 +1,3 @@
-//import liraries
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { StackNavigator } from "react-navigation";
@@ -12,6 +11,15 @@ const Routes = StackNavigator({
 
 // create a component
 class MovieTab extends Component {
+    static navigationOptions = {
+        tabBarLabel: 'Notifications',
+        // tabBarIcon: ({ tintColor }) => (
+        //   <Image
+        //     source={require('./notif-icon.png')}
+        //     style={[styles.icon, {tintColor: tintColor}]}
+        //   />
+        // ),
+      };
   constructor(props) {
     super();
     this.state = {};
@@ -28,7 +36,6 @@ class MovieTab extends Component {
   }
 }
 
-// define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -38,5 +45,4 @@ const styles = StyleSheet.create({
   }
 });
 
-//make this component available to the app
 export default MovieTab;

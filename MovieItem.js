@@ -1,9 +1,7 @@
-//import liraries
 import React, { Component, PureComponent } from "react";
 import { View, Text, StyleSheet, TouchableHighlight, Image } from "react-native";
 import { Card } from 'react-native-elements';
 
-// create a component
 class MovieItem extends PureComponent {
   render() {
     let movie = this.props;
@@ -23,7 +21,6 @@ class MovieItem extends PureComponent {
   }
 }
 
-// define your styles
 const styles = StyleSheet.create({
   container: {
     height: 300,
@@ -34,5 +31,4 @@ const styles = StyleSheet.create({
   }
 });
 
-//make this component available to the app
 export default MovieItem;
